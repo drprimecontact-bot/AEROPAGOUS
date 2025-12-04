@@ -3,101 +3,526 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AREOPAGUS</title>
-
+<meta name="description" content="AREOPAGUS - Donde la ciencia se encuentra con la fe y la filosofía. Artículos, podcast y eventos sobre espiritualidad y pensamiento crítico.">
+<meta name="keywords" content="filosofía, ciencia, fe, espiritualidad, podcast, areópago">
+<meta property="og:title" content="AREOPAGUS - Ciencia, Fe y Filosofía">
+<meta property="og:description" content="Explorando la convergencia entre ciencia, espiritualidad y pensamiento filosófico">
+<meta property="og:type" content="website">
+<title>AREOPAGUS - Ciencia, Fe y Filosofía</title>
 <style>
-    body {
+    * {
         margin: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
         background: #000;
         color: #d9eaff;
+        line-height: 1.6;
+        overflow-x: hidden;
     }
-
+    
     /* ---- NAVBAR ---- */
     nav {
-        background: rgba(0, 0, 0, 0.8);
-        border-bottom: 1px solid #0ff;
-        padding: 15px 25px;
+        background: rgba(0, 0, 0, 0.95);
+        border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        padding: 15px 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: sticky;
+        position: fixed;
+        width: 100%;
         top: 0;
-        backdrop-filter: blur(6px);
-        z-index: 100;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: all 0.3s ease;
     }
-
+    
+    nav.scrolled {
+        padding: 10px 40px;
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .logo-container img {
+        height: 50px;
+        width: auto;
+        filter: drop-shadow(0 0 8px #00eaff);
+        transition: transform 0.3s ease;
+    }
+    
+    .logo-container img:hover {
+        transform: scale(1.05);
+    }
+    
+    .logo-text {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0ff;
+        text-shadow: 0 0 10px #00eaff;
+        letter-spacing: 1px;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    
     nav a {
         color: #66e0ff;
         text-decoration: none;
         font-weight: 500;
-        margin: 0 12px;
-        font-size: 18px;
-        transition: 0.2s;
+        padding: 8px 16px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        border-radius: 5px;
+        position: relative;
     }
-
+    
     nav a:hover {
         color: #0ff;
+        background: rgba(0, 255, 255, 0.1);
         text-shadow: 0 0 10px #00eaff;
     }
-
+    
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: #0ff;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    nav a:hover::after {
+        width: 80%;
+    }
+    
+    /* Hamburger Menu */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+    
+    .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #0ff;
+        transition: 0.3s;
+        border-radius: 3px;
+    }
+    
     /* ---- HERO ---- */
     .hero {
         text-align: center;
-        padding: 80px 20px;
+        padding: 180px 20px 100px;
+        background: linear-gradient(180deg, #000 0%, #001a1a 100%);
+        position: relative;
+        overflow: hidden;
     }
-
-    .hero img {
-        width: 240px;
-        filter: drop-shadow(0 0 12px #00eaff);
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(0,255,255,0.15) 0%, transparent 70%);
+        top: -250px;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
     }
-
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-out;
+    }
+    
     .hero h1 {
-        font-size: 60px;
+        font-size: 56px;
         color: #66e0ff;
-        text-shadow: 0 0 15px #00eaff;
-        margin-top: 20px;
+        text-shadow: 0 0 20px #00eaff;
+        margin: 20px 0;
+        font-weight: 700;
+        letter-spacing: 2px;
     }
-
+    
+    .hero p {
+        font-size: 20px;
+        color: #a0d8f0;
+        max-width: 600px;
+        margin: 20px auto;
+        line-height: 1.8;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 15px 40px;
+        background: linear-gradient(135deg, #0ff, #00aacc);
+        color: #000;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        font-size: 18px;
+    }
+    
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 255, 255, 0.6);
+    }
+    
+    /* ---- SECTIONS ---- */
     .section {
-        padding: 50px 20px;
-        max-width: 900px;
+        padding: 80px 40px;
+        max-width: 1200px;
         margin: auto;
-        border-bottom: 1px solid #111;
+        animation: fadeIn 0.8s ease-out;
     }
-
+    
+    .section:nth-child(even) {
+        background: rgba(0, 26, 26, 0.3);
+    }
+    
     .section h2 {
         color: #79f2ff;
-        text-shadow: 0 0 10px #00eaff;
-        font-size: 34px;
-        margin-bottom: 15px;
+        text-shadow: 0 0 15px #00eaff;
+        font-size: 42px;
+        margin-bottom: 40px;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
     }
-
+    
+    .section h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #0ff, transparent);
+    }
+    
+    /* ---- CARDS ---- */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
     .card {
-        background: #0b0f17;
-        border: 1px solid #0ff2;
-        padding: 20px;
-        border-radius: 10px;
-        margin: 15px 0;
-        box-shadow: 0 0 10px #00eaff33;
+        background: linear-gradient(135deg, #0b0f17 0%, #0a1420 100%);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        padding: 30px;
+        border-radius: 15px;
+        transition: all 0.4s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden;
     }
-
+    
+    .card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .card:hover::before {
+        opacity: 1;
+    }
+    
+    .card:hover {
+        transform: translateY(-10px);
+        border-color: #0ff;
+        box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+    }
+    
+    .card h3 {
+        color: #66e0ff;
+        font-size: 24px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .card p {
+        color: #b8d8e8;
+        line-height: 1.7;
+        font-size: 16px;
+    }
+    
+    .card-icon {
+        font-size: 32px;
+        filter: drop-shadow(0 0 5px #00eaff);
+    }
+    
+    /* ---- PODCAST SECTION ---- */
+    .podcast-player {
+        background: #0b0f17;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        padding: 25px;
+        border-radius: 12px;
+        margin: 20px 0;
+    }
+    
+    .podcast-player h3 {
+        color: #66e0ff;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+    
+    audio {
+        width: 100%;
+        margin-top: 15px;
+        filter: saturate(0) brightness(0.8) hue-rotate(180deg);
+    }
+    
+    /* ---- CONTACT FORM ---- */
+    .contact-form {
+        max-width: 600px;
+        margin: 40px auto;
+        background: #0b0f17;
+        padding: 40px;
+        border-radius: 15px;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-group label {
+        display: block;
+        color: #66e0ff;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 8px;
+        color: #d9eaff;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #0ff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #0ff, #00aacc);
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+    }
+    
+    /* ---- FOOTER ---- */
     footer {
         text-align: center;
-        padding: 30px;
+        padding: 40px 20px;
         color: #66e0ff;
-        border-top: 1px solid #0ff3;
-        margin-top: 40px;
+        border-top: 1px solid rgba(0, 255, 255, 0.3);
+        margin-top: 60px;
+        background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .social-links {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .social-links a {
+        color: #66e0ff;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 50%;
+    }
+    
+    .social-links a:hover {
+        color: #0ff;
+        border-color: #0ff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        transform: translateY(-3px);
+    }
+    
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+        nav {
+            padding: 15px 20px;
+        }
+        
+        .nav-links {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            width: 250px;
+            height: calc(100vh - 70px);
+            background: rgba(0, 0, 0, 0.98);
+            flex-direction: column;
+            padding: 30px;
+            transition: right 0.3s ease;
+            border-left: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .nav-links.active {
+            right: 0;
+        }
+        
+        .menu-toggle {
+            display: flex;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+        }
+        
+        .section {
+            padding: 60px 20px;
+        }
+        
+        .section h2 {
+            font-size: 32px;
+        }
+        
+        .cards-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .logo-text {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .logo-container img {
+            height: 40px;
+        }
+        
+        .hero {
+            padding: 140px 15px 80px;
+        }
+        
+        .contact-form {
+            padding: 25px;
+        }
     }
 </style>
 </head>
-
 <body>
 
 <!-- NAV -->
-<nav>
-    <div style="font-size:22px;color:#0ff;text-shadow:0 0 8px #00eaff;">AREOPAGUS</div>
-    <div>
+<nav id="navbar">
+    <div class="logo-container">
+        <img src="logo.png" alt="AREOPAGUS Logo">
+        <div class="logo-text">AREOPAGUS</div>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
         <a href="#inicio">Inicio</a>
         <a href="#articulos">Artículos</a>
         <a href="#podcast">Podcast</a>
@@ -108,60 +533,167 @@
 
 <!-- HERO -->
 <section id="inicio" class="hero">
-    <img src="logo.png" alt="AREOPAGUS Logo">
-    <h1>AREOPAGUS</h1>
-    <p>Donde la ciencia se encuentra con la fe y la filosofía.</p>
+    <div class="hero-content">
+        <h1>AREOPAGUS</h1>
+        <p>Donde la ciencia se encuentra con la fe y la filosofía. Un espacio para el diálogo, la reflexión y el descubrimiento.</p>
+        <a href="#articulos" class="cta-button">Explorar Contenido</a>
+    </div>
 </section>
 
 <!-- ARTÍCULOS -->
 <section id="articulos" class="section">
-    <h2>Artículos</h2>
-
-    <div class="card">
-        <h3>📘 Ciencia y espiritualidad</h3>
-        <p>Explora la convergencia entre cosmología, biología y pensamiento espiritual.</p>
-    </div>
-
-    <div class="card">
-        <h3>🔬 Fe y filosofía</h3>
-        <p>Una mirada profunda a las preguntas existenciales más antiguas del ser humano.</p>
+    <h2>Artículos Destacados</h2>
+    <div class="cards-grid">
+        <div class="card">
+            <h3><span class="card-icon">📘</span> Ciencia y Espiritualidad</h3>
+            <p>Explora la convergencia entre cosmología moderna, biología evolutiva y pensamiento espiritual. Descubre cómo estas disciplinas se complementan en la búsqueda de la verdad.</p>
+        </div>
+        <div class="card">
+            <h3><span class="card-icon">🔬</span> Fe y Razón</h3>
+            <p>Una mirada profunda a las preguntas existenciales más antiguas del ser humano desde una perspectiva tanto filosófica como científica.</p>
+        </div>
+        <div class="card">
+            <h3><span class="card-icon">🌌</span> Cosmos y Conciencia</h3>
+            <p>Explorando el universo observable y las implicaciones filosóficas de nuestra existencia en un cosmos vasto e incomprensible.</p>
+        </div>
     </div>
 </section>
 
 <!-- PODCAST -->
 <section id="podcast" class="section">
     <h2>Podcast</h2>
-    <div class="card">
-        <h3>🎙 Episodio 1 — Introducción</h3>
-        <p>La historia del Areópago y su relevancia hoy.</p>
-        <!-- EJEMPLO DE AUDIO EMBEBIDO -->
+    <div class="podcast-player">
+        <h3>🎙 Episodio 1 — El Areópago de Atenas</h3>
+        <p>La historia del Areópago antiguo y su relevancia en el mundo contemporáneo. Un viaje a través del tiempo explorando el diálogo entre culturas.</p>
         <audio controls>
             <source src="podcast1.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+    <div class="podcast-player">
+        <h3>🎙 Episodio 2 — Ciencia y Fe</h3>
+        <p>¿Son compatibles la ciencia y la fe? Analizamos los puntos de encuentro entre ambas perspectivas con invitados especiales.</p>
+        <audio controls>
+            <source src="podcast2.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
         </audio>
     </div>
 </section>
 
 <!-- EVENTOS -->
 <section id="eventos" class="section">
-    <h2>Eventos</h2>
-    <div class="card">
-        <h3>📅 Próximos encuentros</h3>
-        <p>Charlas, debates y transmisiones en vivo.</p>
+    <h2>Próximos Eventos</h2>
+    <div class="cards-grid">
+        <div class="card">
+            <h3>📅 Charla en Vivo</h3>
+            <p><strong>Fecha:</strong> 15 de Enero, 2025<br>
+            <strong>Tema:</strong> "La Ética en la Era Digital"<br>
+            Únete a nuestra transmisión en vivo para un debate fascinante.</p>
+        </div>
+        <div class="card">
+            <h3>🎯 Taller de Filosofía</h3>
+            <p><strong>Fecha:</strong> 22 de Enero, 2025<br>
+            <strong>Tema:</strong> "Introducción a la Filosofía Clásica"<br>
+            Cupos limitados. Regístrate pronto.</p>
+        </div>
     </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contacto" class="section">
     <h2>Contacto</h2>
-    <div class="card">
-        <p>Para colaboraciones, preguntas o invitaciones:</p>
-        <p><b>Email:</b> contacto@areopagus.site</p>
+    <div class="contact-form">
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Asunto</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Enviar Mensaje</button>
+        </form>
+        <div style="margin-top: 30px; text-align: center;">
+            <p style="color: #66e0ff;">O escríbenos directamente:</p>
+            <p><strong>Email:</strong> <a href="mailto:contacto@areopagus.site" style="color: #0ff;">contacto@areopagus.site</a></p>
+        </div>
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-    © 2025 AREOPAGUS — Todos los derechos reservados
+    <div class="social-links">
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="YouTube">📺</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">📘</a>
+    </div>
+    <p>© 2025 AREOPAGUS — Todos los derechos reservados</p>
+    <p style="margin-top: 10px; font-size: 14px; color: #5599aa;">Diseñado con pasión por el conocimiento</p>
 </footer>
+
+<script>
+// Menu Toggle para móviles
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+});
+
+// Cerrar menú al hacer click en un link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+    });
+});
+
+// Efecto scroll en navbar
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+// Formulario de contacto
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+    e.target.reset();
+});
+
+// Animación de entrada para elementos
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.card, .podcast-player').forEach(el => {
+    observer.observe(el);
+});
+</script>
 
 </body>
 </html>
