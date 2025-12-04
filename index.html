@@ -1,11 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>AEROPAGOUS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AREOPAGUS</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #000;
+        color: #d9eaff;
+    }
+
+    /* ---- NAVBAR ---- */
+    nav {
+        background: rgba(0, 0, 0, 0.8);
+        border-bottom: 1px solid #0ff;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(6px);
+        z-index: 100;
+    }
+
+    nav a {
+        color: #66e0ff;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 12px;
+        font-size: 18px;
+        transition: 0.2s;
+    }
+
+    nav a:hover {
+        color: #0ff;
+        text-shadow: 0 0 10px #00eaff;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+        text-align: center;
+        padding: 80px 20px;
+    }
+
+    .hero img {
+        width: 240px;
+        filter: drop-shadow(0 0 12px #00eaff);
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        color: #66e0ff;
+        text-shadow: 0 0 15px #00eaff;
+        margin-top: 20px;
+    }
+
+    .section {
+        padding: 50px 20px;
+        max-width: 900px;
+        margin: auto;
+        border-bottom: 1px solid #111;
+    }
+
+    .section h2 {
+        color: #79f2ff;
+        text-shadow: 0 0 10px #00eaff;
+        font-size: 34px;
+        margin-bottom: 15px;
+    }
+
+    .card {
+        background: #0b0f17;
+        border: 1px solid #0ff2;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 15px 0;
+        box-shadow: 0 0 10px #00eaff33;
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        color: #66e0ff;
+        border-top: 1px solid #0ff3;
+        margin-top: 40px;
+    }
+</style>
 </head>
-<body style="font-family: Arial; padding: 40px;">
-  <h1>AEROPAGOUS</h1>
-  <p>Mi sitio ya funciona en GitHub Pages.</p>
+
+<body>
+
+<!-- NAV -->
+<nav>
+    <div style="font-size:22px;color:#0ff;text-shadow:0 0 8px #00eaff;">AREOPAGUS</div>
+    <div>
+        <a href="#inicio">Inicio</a>
+        <a href="#articulos">Artículos</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#contacto">Contacto</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+    <img src="logo.png" alt="AREOPAGUS Logo">
+    <h1>AREOPAGUS</h1>
+    <p>Donde la ciencia se encuentra con la fe y la filosofía.</p>
+</section>
+
+<!-- ARTÍCULOS -->
+<section id="articulos" class="section">
+    <h2>Artículos</h2>
+
+    <div class="card">
+        <h3>📘 Ciencia y espiritualidad</h3>
+        <p>Explora la convergencia entre cosmología, biología y pensamiento espiritual.</p>
+    </div>
+
+    <div class="card">
+        <h3>🔬 Fe y filosofía</h3>
+        <p>Una mirada profunda a las preguntas existenciales más antiguas del ser humano.</p>
+    </div>
+</section>
+
+<!-- PODCAST -->
+<section id="podcast" class="section">
+    <h2>Podcast</h2>
+    <div class="card">
+        <h3>🎙 Episodio 1 — Introducción</h3>
+        <p>La historia del Areópago y su relevancia hoy.</p>
+        <!-- EJEMPLO DE AUDIO EMBEBIDO -->
+        <audio controls>
+            <source src="podcast1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</section>
+
+<!-- EVENTOS -->
+<section id="eventos" class="section">
+    <h2>Eventos</h2>
+    <div class="card">
+        <h3>📅 Próximos encuentros</h3>
+        <p>Charlas, debates y transmisiones en vivo.</p>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto" class="section">
+    <h2>Contacto</h2>
+    <div class="card">
+        <p>Para colaboraciones, preguntas o invitaciones:</p>
+        <p><b>Email:</b> contacto@areopagus.site</p>
+    </div>
+</section>
+
+<footer>
+    © 2025 AREOPAGUS — Todos los derechos reservados
+</footer>
+
 </body>
 </html>
+
